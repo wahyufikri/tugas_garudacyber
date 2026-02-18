@@ -57,3 +57,82 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# 📘 Project Documentation
+
+## 📌 Overview
+
+Project ini merupakan aplikasi berbasis Laravel 12 yang memiliki fitur:
+
+- Manajemen Course
+- Diskusi per Course
+- Real-time Discussion (WebSocket Broadcasting)
+- Soft Delete pada tabel `courses`
+
+Aplikasi menggunakan Laravel Broadcasting untuk mengirim event diskusi secara real-time tanpa perlu refresh halaman.
+
+---
+
+## 🚀 Features
+
+### Course Management
+- Create Course
+- Update Course
+- Soft Delete Course
+- Restore Course
+- Force Delete Course
+
+Soft delete diaktifkan menggunakan fitur bawaan Laravel `SoftDeletes`.
+
+---
+
+### Discussion System
+- User dapat membuat diskusi pada setiap course
+- Diskusi langsung muncul secara real-time
+- Menggunakan Laravel Event Broadcasting
+
+Event:
+- DiscussionPosted
+
+Channel:
+course.{course_id}
+
+---
+
+## ⚡ Real-Time Broadcasting Setup
+
+Tambahkan di file `.env`:
+
+BROADCAST_CONNECTION=reverb
+QUEUE_CONNECTION=sync
+
+Jalankan server broadcasting:
+
+php artisan reverb:start
+
+---
+
+## 🗑 Soft Delete Implementation
+
+Migration:
+$table->softDeletes();
+
+Model:
+use SoftDeletes;
+
+
+
+---
+
+## 🛠 Installation
+
+git clone <repository-url>
+cd project-name
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+npm run dev
+php artisan serve
+
