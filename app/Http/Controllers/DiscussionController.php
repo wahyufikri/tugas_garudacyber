@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Discussion;
 use Illuminate\Http\Request;
+use App\Events\DiscussionPosted;
 
 class DiscussionController extends Controller
 {
@@ -19,8 +20,12 @@ class DiscussionController extends Controller
             'content' => $request->content
         ]);
 
+
+        broadcast(new DiscussionPosted($discussion))->toOthers();
+
         return response()->json($discussion, 201);
     }
+
     public function index($id)
     {
         $discussions = Discussion::with(['user', 'replies.user'])
