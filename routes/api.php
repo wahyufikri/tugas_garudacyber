@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubmissionController;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -28,6 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/courses/{id}/discussions', [DiscussionController::class, 'store']);
     Route::get('/courses/{id}/discussions', [DiscussionController::class, 'index']);
     Route::post('/discussions/{id}/replies', [ReplyController::class, 'store']);
+    Route::get('/reports/courses', [ReportController::class, 'courseStats']);
+    Route::get('/reports/submissions', [ReportController::class, 'submissionStats']);
+    Route::get('/reports/students/{id}', [ReportController::class, 'studentStats']);
 });
 
 
