@@ -4,7 +4,9 @@ use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\SubmissionController;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -23,6 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/assignments/{id}', [AssignmentController::class, 'show']);
     Route::post('/assignments/{id}/submit', [SubmissionController::class, 'store']);
     Route::post('/submissions/{id}/grade', [SubmissionController::class, 'grade']);
+    Route::post('/courses/{id}/discussions', [DiscussionController::class, 'store']);
+    Route::get('/courses/{id}/discussions', [DiscussionController::class, 'index']);
+    Route::post('/discussions/{id}/replies', [ReplyController::class, 'store']);
 });
 
 
